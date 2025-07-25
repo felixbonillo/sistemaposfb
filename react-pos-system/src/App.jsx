@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react"; //Importamos los hooks de React
+import React, { useState, useEffect } from "react";
+//Importamos los hooks de React
+import "./index.css"; //Importamos los estilos globales
 
 //--- Componente: LoginScreen (Pantalla de Inicio de Sesión) ---
 //Este componente se encarga de mostrar el formulario del login y manejar su logica
@@ -35,16 +37,18 @@ function LoginScreen({ onLoginSuccess }) {
   // 4° JSX: del componente LoginScreen (tailwindcss)
 
   return (
-    // Contenedor principal: ocupa toda la altura de la pantalla y centra su contenido
+    /* Contenedor principal: ocupa toda la altura de la pantalla y centra su contenido */
+    /* Tarjeta del formulario: Fondo blanco, sombra, padding, borde redondeado, ancho*/
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      // Tarjeta del formulario: Fondo blanco, sombra, padding, borde
-      redondeado, ancho
       <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Iniciar Sesion
         </h2>
+        {/* Formulario de inicio de sesión */}
+        {/* Utilizamos un formulario controlado: los valores de los inputs son gestionados por el estado de React */}
+        {/* Al enviar el formulario, llamamos a la funcion handleLogin */}
+        {/* Utilizamos clases de Tailwind CSS para estilizar los inputs y el botón */}
         <form onSubmit={handleLogin} className="space-y-4">
-          //Formulario con espacio entre elementos
           <div>
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -57,10 +61,13 @@ function LoginScreen({ onLoginSuccess }) {
               id="username"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-blue-500"
               placeholder="admin o seller"
-              value={username} //Valor del input controlado por el estado 'username'
-              onChange={(e) => setUsername(e.target.value)} //Actualiza el estado 'username' cada vez que el usuario escribe
-              required //Campo obligatorio
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
             />
+            {/* Valor del input controlado por el estado 'username' */}
+            {/* Actualiza el estado 'username' cada vez que el usuario escribe */}
+            {/* Campo obligatorio */}
           </div>
           <div>
             <label
@@ -74,12 +81,15 @@ function LoginScreen({ onLoginSuccess }) {
               id="password"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus.ring-blue-500"
               placeholder="admin o seller"
-              value={password} //Valor del input controlado por el estado 'password'
-              onChange={(e) => setPassword(e.target.value)} //Actualiza el estado password cada vez que el usuario escribe
-              required //Campo requerido}
+              value={password} //
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
+            {/*Valor del input controlado por el estado 'password' */}
+            {/* Actualiza el estado 'password' cada vez que el usuario escribe */}
+            {/* Campo obligatorio */}
           </div>
-          //Renderizado condicional
+          {/*Renderizado condicional*/}
           {error && <p className="text-red-500 text-sm text-center">{error}</p>}
           <button
             type="submit"
@@ -120,7 +130,6 @@ function DashboardScreen({ userRole, onLogout }) {
   );
 }
 
-
 // --- Componente principal de la apllicacion: App ---
 //Este es el componente principal que maneja el estado de la aplicacion
 
@@ -130,8 +139,12 @@ function App() {
   // 'userRole' guarda el rol del usuario ('admin' o 'seller')
   // Inicializamos estos estados intentado leerlos desde 'localStorage' para recordar la sesion
 
-  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isLoggedIn') === 'true') //Convierte la cadena ´true´ a booleano
-  const [userRole, setUserRole] = useState(localStorage.getItem('userRole') || null); //Si no hay rol, es null
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem("isLoggedIn") === "true"
+  ); //Convierte la cadena ´true´ a booleano
+  const [userRole, setUserRole] = useState(
+    localStorage.getItem("userRole") || null
+  ); //Si no hay rol, es null
 
   // 2° useEffect: para persistencia de sension con localStorage
   //Cada vez que 'isAuthenticated' o 'userRole' cambien, actualizamos
@@ -140,39 +153,46 @@ function App() {
     //Si el usuario esta autenticado, guardamos su estado y rol en localStorage
 
     if (isAuthenticated) {
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('userRole', userRole);
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userRole", userRole);
     } else {
       //Si el usuario no esta autenticado o acaba de cerrar sesion, limpiamos localStorage
-      localStorage.removeItem('isLoggedIn');
-      localStorage.removeItem('userRole');
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("userRole");
     }
-  },[isAuthenticated, userRole]) //Array de dependencias: Este efecto se re-ejecutara cada vez que cambien estos estados
+  }, [isAuthenticated, userRole]); //Array de dependencias: Este efecto se re-ejecutara cada vez que cambien estos estados
 
-  // 3° Funcion handleLoginSuccess: Se pasa al LoginScreen para que el padre se entere del login 
+  // 3° Funcion handleLoginSuccess: Se pasa al LoginScreen para que el padre se entere del login
   const handleLoginSuccess = (role) => {
     setIsAuthenticated(true); //Actualiza el estado de autenticacion a true
     setUserRole(role); //Actualiza el rol del usuario
-  }
+  };
 
   // 4° Funcion handleLogout: Se pasa al DashboardScreen para cerrar sesion
   const handleLogout = () => {
     setIsAuthenticated(false); //Actualiza el estado de autenticacion a false
     setUserRole(null); //Limpia el rol del usuario
-  }
+  };
 
   // 5° Renderizado principal de app: Decide que pantalla mostrar
+  {
+    /* Renderizado condicional basado en el estado de la autenticacion */
+  }
+  {
+    /*Si isAuthenticated es true, mostramos el DashboardScreen*/
+  }
+  {
+    /*De lo contrario, mostramos el LoginScreen*/
+  }
   return (
     <>
-    //Renderizado condicional basado en el estado de la autenticacion
-    //Si isAuthenticated es true, mostramos el DashboardScreen
-    //De lo contrario, mostramos el LoginScreen
-    {isAuthenticated ? (
-      <DashboardScreen userRole={userRole} onLogout={handleLogout} />
-    ) : (
-      <LoginScreen onLoginSuccess={handleLoginSuccess} /> //Pasamos la funcion de login al LoginScreen
-      
-    )}
+      {isAuthenticated ? (
+        <DashboardScreen userRole={userRole} onLogout={handleLogout} />
+      ) : (
+        <LoginScreen onLoginSuccess={handleLoginSuccess} /> //Pasamos la funcion de login al LoginScreen
+      )}
     </>
-  )
+  );
 }
+
+export default App; //Exportamos el componente App como el componente principal de la aplicacion
