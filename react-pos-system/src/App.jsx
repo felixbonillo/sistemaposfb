@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-//Importamos los hooks de React
-import "./index.css"; //Importamos los estilos globales
+import DashboardLayout from "./layouts/DashboardLayout";
+import LoginScreen from "./components/Auth/LoginScreen";
+
 
 
 
@@ -63,7 +64,7 @@ function App() {
   return (
     <>
       {isAuthenticated ? (
-        <DashboardScreen userRole={userRole} onLogout={handleLogout} />
+        <DashboardLayout userRole={userRole} onLogout={handleLogout} />
       ) : (
         <LoginScreen onLoginSuccess={handleLoginSuccess} /> //Pasamos la funcion de login al LoginScreen
       )}
