@@ -22,12 +22,31 @@ function Sidebar({ activeSection, onNavigate, userRole, onLogout, navItems }) {
             {/*Navegacion principal */}
             <nav className="flex-grow">
                 <ul>
-                    <li key={item.id} className="mb-2">
-                        <button> </button>
-                    </li>
+                    {navItems.map((item) =>
+                    (item.roles.includes(userRole) && (
+
+                        <li key={item.id} className="mb-2">
+
+                            <button className={`w-full flex items-center p-3 rounded-lg transition-colors duration-200 ${activeSection === item.id ? 'bg-blue-700' : 'bg-gray-700 hover:bg-gray-600'}`} onClick={() => onNavigate(item.id)}>
+                                {item.icon && <item.icon className="mr-3 text-xl" />}
+                                <span className="text-lg"> {item.name} </span>
+
+                            </button>
+                        </li>)
+
+                    ))}
                 </ul>
             </nav>
-        </div>
+
+            <div className="mt-auto">
+                <button onClick={onLogout} className="w-full flex items-center p-3 rounded-lg bg-red-600 hover:bg-red-700 transition-colors duration-200" >
+                    <FaSingOutAlt className="mr-3 text-xl" />
+                    <span className="text-lg"> Cerrar Sesion</span>
+                </button>
+            </div>
+        </div >
 
     )
 }
+
+export default Sidebar
