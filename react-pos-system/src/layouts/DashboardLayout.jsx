@@ -1,6 +1,6 @@
 import React from "react";
 //Componentes de iconos que se usaran en sidebar
-import SideBar from "../components/SideBar";
+import Sidebar from "../components/Sidebar";
 import {
   FaCube,
   FaUsers,
@@ -86,7 +86,7 @@ function DashboardLayout({ userRole, onLogout }) {
       - onLogout: Funcion para que el Sidebar pueda iniciar el proceso de cierre de sesion
       - navItems: Le pasa la configuracion completa de la navegacion incluyenbdo los iconos 
       */}
-      <SideBar
+      <Sidebar
         activeSection={activeSection}
         onNavigate={handleNavigate}
         userRole={userRole}

@@ -2,11 +2,6 @@ import React, { useState, useEffect } from "react";
 import DashboardLayout from "./layouts/DashboardLayout";
 import LoginScreen from "./components/Auth/LoginScreen";
 
-
-
-
-
-
 // --- Componente principal de la apllicacion: App ---
 //Este es el componente principal que maneja el estado de la aplicacion
 
