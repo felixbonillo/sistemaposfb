@@ -34,7 +34,7 @@ const navItems = [
   },
   { id: "clients", name: "Clientes", icon: FaUsers, roles: ["admin"] },
   { id: "reports", name: "Reportes", icon: FaChartPie, roles: ["admin"] },
-  { id: "currency", name: "Tasa BCV", FaDollarSign, roles: ["admin"] },
+  { id: "currency", name: "Tasa BCV", icon: FaDollarSign, roles: ["admin"] },
 ];
 
 // --- Componente: DashboardScreen (Pantalla principal del sistema) ---

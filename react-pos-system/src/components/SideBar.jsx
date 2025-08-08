@@ -2,7 +2,7 @@ import React from "react";
 
 //solo este icon se va a importar los demas vienen como props 
 
-import { FaSingOutAlt } from 'react-icons/fa'
+import { FaSignOutAlt } from 'react-icons/fa'
 
 //Sidebar recibe props:
 // - activeSection: ID de la seccion actual (Para resaltarla)
@@ -40,7 +40,7 @@ function Sidebar({ activeSection, onNavigate, userRole, onLogout, navItems }) {
 
             <div className="mt-auto">
                 <button onClick={onLogout} className="w-full flex items-center p-3 rounded-lg bg-red-600 hover:bg-red-700 transition-colors duration-200" >
-                    <FaSingOutAlt className="mr-3 text-xl" />
+                    <FaSignOutAlt className="mr-3 text-xl" />
                     <span className="text-lg"> Cerrar Sesion</span>
                 </button>
             </div>
