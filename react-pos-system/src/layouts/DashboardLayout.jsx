@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 //Componentes de iconos que se usaran en sidebar
 import Sidebar from "../components/Sidebar";
 import {
@@ -7,6 +7,7 @@ import {
   FaChartPie,
   FaShoppingCart,
   FaDollarSign,
+  FaBars,
 } from "react-icons/fa";
 
 // --- Importaciones de componentes necesarios MODULOS ---
@@ -44,10 +45,17 @@ const navItems = [
 function DashboardLayout({ userRole, onLogout }) {
   // 1° JSX del componente DashboardLayout con tailwind
   const [activeSection, setActiveSection] = React.useState("inventory"); //Estado para manejar la seccion activa del sidebar
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false) //Nuevo estado para controlar el sidebar mobile, por defecto cerrado
 
   const handleNavigate = (sectionId) => {
     setActiveSection(sectionId); //Actualiza la seccion activa al hacer clic en un item del sidebar
+    setIsSidebarOpen(false) //Cierra el sidebar al navegar por una nueva seccion
   };
+
+  //Funcion para alternar el estado del sidebar
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen)
+  }
 
   //Funcion para renderizar el contenido de la seccion activa
   const renderSectionContent = () => {
@@ -92,6 +100,8 @@ function DashboardLayout({ userRole, onLogout }) {
         userRole={userRole}
         onLogout={onLogout}
         navItems={navItems}
+        isSidebarOpen={isSidebarOpen}
+        toggleSidebar={toggleSidebar}
       />
 
       <div className="flex-1 flex flex-col">
