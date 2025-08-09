@@ -85,7 +85,7 @@ function DashboardLayout({ userRole, onLogout }) {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-gray-100">
       {/* Aqui es donde se anadira el Sidebar */}
       {/* Componente Sidebar:
       - activeSection: Le dice al Sidebar que item debe resaltar como activo
@@ -104,11 +104,24 @@ function DashboardLayout({ userRole, onLogout }) {
         toggleSidebar={toggleSidebar}
       />
 
+      {/*Overlay para moviles cuando el sidebar este abierto */}
+      {isSidebarOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden" onClick={toggleSidebar}></div>
+      )}
+
+
+
+      {/* Contenido principal del dashboard */}
       <div className="flex-1 flex flex-col">
         {/*ENCABEZADO del contenido principal
         - Muestra el nombre de la seccion actual y el rol del usuario
         */}
         <header className="bg-white shadow p-4 flex justify-between items-center">
+          {/* Boton hamburguesa */}
+          <button className="lg:hidden text-gray-600 mr-4" onClick={toggleSidebar}>
+            <FaBars className="text-2xl"/>
+
+          </button>
           <h2 className="text-2xl font-semibold text-gray-800">
             {/* Busca el nombre de la seccion activa en el array 'navItems' para mostrarlo en el header  */}
             {navItems.find((item) => item.id === activeSection)?.name ||
