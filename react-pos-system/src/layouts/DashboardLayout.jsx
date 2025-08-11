@@ -61,7 +61,7 @@ function DashboardLayout({ userRole, onLogout }) {
   const renderSectionContent = () => {
     switch (activeSection) {
       case "inventory":
-        return <InventoryModule />;
+        return <InventoryModule userRole={userRole}/>;
       case "pos":
         return <POSModule />;
       case "clients":
@@ -71,16 +71,8 @@ function DashboardLayout({ userRole, onLogout }) {
       case "currency":
         return <CurrencyModule />;
       default:
-        return (
-          <div className="p-8">
-            <h2 className="text-3xl font-semibold text-gray-800 mb-6">
-              Bienvenido al Dashboard
-            </h2>
-            <p className="text-gray-700">
-              Seleccione una seccion del menu lateral
-            </p>
-          </div>
-        );
+        return <InventoryModule userRole={userRole} />;
+        ;
     }
   };
 
