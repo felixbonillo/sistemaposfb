@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 //Componentes de iconos que se usaran en sidebar
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/SideBar";
 import {
   FaCube,
   FaUsers,
@@ -61,7 +61,7 @@ function DashboardLayout({ userRole, onLogout }) {
   const renderSectionContent = () => {
     switch (activeSection) {
       case "inventory":
-        return <InventoryModule userRole={userRole}/>;
+        return <InventoryModule userRole={userRole} />;
       case "pos":
         return <POSModule />;
       case "clients":
@@ -111,7 +111,7 @@ function DashboardLayout({ userRole, onLogout }) {
         <header className="bg-white shadow p-4 flex justify-between items-center">
           {/* Boton hamburguesa */}
           <button className="lg:hidden text-gray-600 mr-4" onClick={toggleSidebar}>
-            <FaBars className="text-2xl"/>
+            <FaBars className="text-2xl" />
 
           </button>
           <h2 className="text-2xl font-semibold text-gray-800">
