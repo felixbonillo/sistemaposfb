@@ -73,7 +73,7 @@ function InventoryModule({ userRole }) {
 
       {/* Renderizado del componente ProductTable */}
       <ProductTable products={products} bcvRate={bcvRate} userRole={userRole} onEditProduct={handleEditProduct} onDeleteProduct={handleDeleteProduct} />
-      <ProductFormModal isOpen={isAddProductModalOpen} onClose={handleCloseAddProductModal} onAddProduct={handleAddProduct} /> 
+      <ProductFormModal isOpen={handleOpenAddProductModal} onClose={handleCloseAddProductModal} onAddProduct={handleAddProduct} /> 
     </div>
   );
 }

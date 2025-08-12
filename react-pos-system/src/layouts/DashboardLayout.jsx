@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 //Componentes de iconos que se usaran en sidebar
-import Sidebar from "../components/SideBar";
+import Sidebar from "../components/Sidebar";
 import {
   FaCube,
   FaUsers,
