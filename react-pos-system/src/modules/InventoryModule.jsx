@@ -55,10 +55,6 @@ function InventoryModule({ userRole }) {
 
   return (
     <div className="p-8">
-      <h2 className="text-3xl font-semibold text-gray-800 mb-6">
-        Modulo de Inventario
-      </h2>
-
       <div className="mb-6 flex justify-end">
         {/* Solo muestra el botón "Añadir Producto" si el rol es 'admin' */}
         {userRole === "admin" && (
@@ -73,7 +69,7 @@ function InventoryModule({ userRole }) {
 
       {/* Renderizado del componente ProductTable */}
       <ProductTable products={products} bcvRate={bcvRate} userRole={userRole} onEditProduct={handleEditProduct} onDeleteProduct={handleDeleteProduct} />
-      <ProductFormModal isOpen={handleOpenAddProductModal} onClose={handleCloseAddProductModal} onAddProduct={handleAddProduct} /> 
+      <ProductFormModal isOpen={isAddProductModalOpen} onClose={handleCloseAddProductModal} onAddProduct={handleAddProduct} /> 
     </div>
   );
 }
