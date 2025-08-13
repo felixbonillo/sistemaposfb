@@ -4,6 +4,7 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
+  getFilteredRowModel,
 } from "@tanstack/react-table";
 
 //Este componente solo se encargara de mostrar la tabla de productos
@@ -15,6 +16,7 @@ function ProductTable({
   userRole,
   onEditProduct,
   onDeleteProduct,
+  globalFilter,
 }) {
   //1. Definir las columnas de las tablas
   //Cada objeto va a definir una columna
@@ -85,6 +87,12 @@ function ProductTable({
     data: products, // Los datos que la tabla mostrara
     columns, //Las columnas que definimos
     getCoreRowModel: getCoreRowModel(), //Un modelo esencial para que la tabla funcione
+    //Configuracion para el filtro global
+    getFilteredRowModel: getFilteredRowModel(), //Habilita el filtrado
+    state: {
+      globalFilter: globalFilter, //Coenta el filtro global al estado del input
+    },
+    onGlobalFilterChange: setGlobalFilter
   });
 
   if (!products || products.length === 0) {
@@ -108,9 +116,9 @@ function ProductTable({
                     {header.isPlaceholder
                       ? null
                       : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
                   </th>
                 ))}
               </tr>

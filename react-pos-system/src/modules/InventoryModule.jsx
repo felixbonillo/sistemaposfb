@@ -18,6 +18,8 @@ function InventoryModule({ userRole }) {
   const bcvRate = 131.5; //Ejemplo de tasa Bolivar/Dolar
 
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
+  //Estado para la busqueda global
+  const [globalFilter, setGlobalFilter] = useState('')
 
   const handleOpenAddProductModal = () => {
     setIsAddProductModalOpen(true);
@@ -55,9 +57,19 @@ function InventoryModule({ userRole }) {
 
   return (
     <div className="p-8">
-      <div className="mb-6 flex justify-end">
-        {/* Solo muestra el botón "Añadir Producto" si el rol es 'admin' */}
-        {userRole === "admin" && (
+      <h2 className="text-3xl font-semibold text-gray-800 mb-6">Módulo de Inventario</h2>
+
+      <div className="flex justify-between items-center mb-6"> {/* Alineación para el buscador y el botón */}
+        {/* NUEVO: Campo de Búsqueda Global */}
+        <input
+          type="text"
+          value={globalFilter || ''} // Asegura que el input no sea 'undefined'
+          onChange={e => setGlobalFilter(e.target.value)}
+          placeholder="Buscar productos..."
+          className="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 flex-grow mr-4 max-w-sm" // max-w-sm para que no sea demasiado ancho
+        />
+
+        {userRole === 'admin' && (
           <button
             onClick={handleOpenAddProductModal}
             className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-200"
@@ -68,8 +80,18 @@ function InventoryModule({ userRole }) {
       </div>
 
       {/* Renderizado del componente ProductTable */}
-      <ProductTable products={products} bcvRate={bcvRate} userRole={userRole} onEditProduct={handleEditProduct} onDeleteProduct={handleDeleteProduct} />
-      <ProductFormModal isOpen={isAddProductModalOpen} onClose={handleCloseAddProductModal} onAddProduct={handleAddProduct} /> 
+      <ProductTable
+        products={products}
+        bcvRate={bcvRate} userRole={userRole}
+        onEditProduct={handleEditProduct}
+        onDeleteProduct={handleDeleteProduct}
+        globalFilter={globalFilter} />
+
+      <ProductFormModal
+        isOpen={isAddProductModalOpen}
+        onClose={handleCloseAddProductModal}
+        onAddProduct={handleAddProduct} />
+
     </div>
   );
 }
