@@ -92,7 +92,7 @@ function ProductTable({
     state: {
       globalFilter: globalFilter, //Coenta el filtro global al estado del input
     },
-    onGlobalFilterChange: setGlobalFilter
+
   });
 
   if (!products || products.length === 0) {
