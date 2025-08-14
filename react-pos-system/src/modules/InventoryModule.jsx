@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ProductTable from "./inventory/ProductTable";
 import ProductFormModal from "./inventory/ProductFormModal";
+import InventoryActions from "./inventory/InventoryActions";
 
 //Datos Simulados mientras, luego vendra de una api
 
@@ -69,14 +70,10 @@ function InventoryModule({ userRole }) {
           className="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 flex-grow mr-4 max-w-sm" // max-w-sm para que no sea demasiado ancho
         />
 
-        {userRole === 'admin' && (
-          <button
-            onClick={handleOpenAddProductModal}
-            className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-200"
-          >
-            Añadir Producto
-          </button>
-        )}
+        <InventoryActions
+          userRole={userRole}
+          onAddClick={handleOpenAddProductModal}
+        />
       </div>
 
       {/* Renderizado del componente ProductTable */}
