@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ProductTable from "./inventory/ProductTable";
 import ProductFormModal from "./inventory/ProductFormModal";
 import InventoryActions from "./inventory/InventoryActions";
+import InventorySearch from "./inventory/InventorySearch";
 
 //Datos Simulados mientras, luego vendra de una api
 
