@@ -62,12 +62,11 @@ function InventoryModule({ userRole }) {
 
       <div className="flex justify-between items-center mb-6"> {/* Alineación para el buscador y el botón */}
         {/* NUEVO: Campo de Búsqueda Global */}
-        <input
-          type="text"
-          value={globalFilter || ''} // Asegura que el input no sea 'undefined'
-          onChange={e => setGlobalFilter(e.target.value)}
-          placeholder="Buscar productos..."
-          className="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 flex-grow mr-4 max-w-sm" // max-w-sm para que no sea demasiado ancho
+        
+        <InventorySearch
+          globalFilter = {globalFilter}
+          setGlobalFilter = {setGlobalFilter}
+          placeholder = "Buscar productos..."
         />
 
         <InventoryActions
