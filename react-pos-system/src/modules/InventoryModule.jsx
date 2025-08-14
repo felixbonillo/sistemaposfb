@@ -85,7 +85,8 @@ function InventoryModule({ userRole }) {
         bcvRate={bcvRate} userRole={userRole}
         onEditProduct={handleEditProduct}
         onDeleteProduct={handleDeleteProduct}
-        globalFilter={globalFilter} />
+        globalFilter={globalFilter}
+        setGlobalFilter={setGlobalFilter} />
 
       <ProductFormModal
         isOpen={isAddProductModalOpen}

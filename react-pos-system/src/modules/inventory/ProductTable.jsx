@@ -17,6 +17,7 @@ function ProductTable({
   onEditProduct,
   onDeleteProduct,
   globalFilter,
+  setGlobalFilter
 }) {
   //1. Definir las columnas de las tablas
   //Cada objeto va a definir una columna
@@ -90,9 +91,9 @@ function ProductTable({
     //Configuracion para el filtro global
     getFilteredRowModel: getFilteredRowModel(), //Habilita el filtrado
     state: {
-      globalFilter: globalFilter, //Coenta el filtro global al estado del input
+      globalFilter: globalFilter, //Conecta el filtro global al estado del input
     },
-
+    onGlobalFilterChange: setGlobalFilter
   });
 
   if (!products || products.length === 0) {
