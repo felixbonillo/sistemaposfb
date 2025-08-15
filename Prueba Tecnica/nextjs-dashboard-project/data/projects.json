@@ -1,0 +1,57 @@
+[
+    {
+        "id": "proj-1",
+        "name": "Desarrollo de App Móvil para Cliente X",
+        "description": "Creación de una aplicación móvil híbrida para gestión de pedidos.",
+        "status": "En Progreso",
+        "priority": "Alta",
+        "startDate": "2024-03-01",
+        "endDate": "2024-09-30",
+        "budget": 25000,
+        "teamMembers": [
+            "Alice",
+            "Bob",
+            "Charlie"
+        ]
+    },
+    {
+        "id": "proj-2",
+        "name": "Rediseño de Sitio Web Corporativo",
+        "description": "Actualización de la interfaz y experiencia de usuario del sitio web principal.",
+        "status": "Completado",
+        "priority": "Media",
+        "startDate": "2023-11-15",
+        "endDate": "2024-02-28",
+        "budget": 12000,
+        "teamMembers": [
+            "David",
+            "Eve"
+        ]
+    },
+    {
+        "id": "proj-3",
+        "name": "Implementación de Sistema CRM",
+        "description": "Integración de un nuevo sistema de gestión de relaciones con clientes.",
+        "status": "Pendiente",
+        "priority": "Alta",
+        "startDate": "2024-10-01",
+        "endDate": "2025-03-31",
+        "budget": 40000,
+        "teamMembers": [
+            "Frank"
+        ]
+    },
+    {
+        "id": "proj-4",
+        "name": "Optimización de Base de Datos",
+        "description": "Revisión y mejora del rendimiento de la base de datos principal.",
+        "status": "En Progreso",
+        "priority": "Media",
+        "startDate": "2024-06-01",
+        "endDate": "2024-08-31",
+        "budget": 8000,
+        "teamMembers": [
+            "Grace"
+        ]
+    }
+]
