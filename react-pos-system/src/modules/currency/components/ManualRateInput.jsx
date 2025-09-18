@@ -16,7 +16,7 @@ function ManualRateInput({ onSaveManualRate }) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="flex items-center gap-2 mb-4">
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-stretch gap-2 mb-4">
             <input type="number"
                 step="0.01"
                 value={manualRate}

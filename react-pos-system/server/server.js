@@ -1,3 +1,4 @@
+import process from "process";
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 //Express para crear el servidor
@@ -7,7 +8,7 @@ import express from "express";
 import axios from "axios";
 
 //Cheerio para analizar el HTML
-import cheerio from "cheerio";
+import * as cheerio from "cheerio";
 
 //Cors para permitir peticiones desde el front-end
 import cors from "cors";
@@ -63,12 +64,10 @@ app.get("/api/rate", async (req, res) => {
   } catch (error) {
     console.error("Error durante el web scraping:", error.message);
     //Enviamos una respuesta de error si algo sale mal
-    res
-      .status(500)
-      .json({
-        error: "Error al obtener la tasa de BCV",
-        details: error.message,
-      });
+    res.status(500).json({
+      error: "Error al obtener la tasa de BCV",
+      details: error.message,
+    });
   }
 });
 

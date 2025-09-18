@@ -11,7 +11,7 @@ import {
 } from "react-icons/fa";
 
 // --- Importaciones de componentes necesarios MODULOS ---
-import InventoryModule from "../modules/InventoryModule";
+import InventoryModule from "../modules/inventory/InventoryModule";
 import POSModule from "../modules/POSModule";
 import ClientsModule from "../modules/ClientsModule";
 import CurrencyModule from "../modules/currency/CurrencyModule";

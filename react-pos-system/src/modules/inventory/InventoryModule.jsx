@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import ProductTable from "./inventory/ProductTable";
-import ProductFormModal from "./inventory/ProductFormModal";
-import InventoryActions from "./inventory/InventoryActions";
-import InventorySearch from "./inventory/InventorySearch";
+import ProductTable from "./components/ProductTable";
+import ProductFormModal from "./components/ProductFormModal";
+import InventoryActions from "./components/InventoryActions";
+import InventorySearch from "./components/InventorySearch";
 
 //Datos Simulados mientras, luego vendra de una api
 
@@ -63,11 +63,11 @@ function InventoryModule({ userRole }) {
 
       <div className="flex justify-between items-center mb-6"> {/* Alineación para el buscador y el botón */}
         {/* NUEVO: Campo de Búsqueda Global */}
-        
+
         <InventorySearch
-          globalFilter = {globalFilter}
-          setGlobalFilter = {setGlobalFilter}
-          placeholder = "Buscar productos..."
+          globalFilter={globalFilter}
+          setGlobalFilter={setGlobalFilter}
+          placeholder="Buscar productos..."
         />
 
         <InventoryActions
