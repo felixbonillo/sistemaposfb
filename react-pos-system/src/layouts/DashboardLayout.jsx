@@ -14,7 +14,7 @@ import {
 import InventoryModule from "../modules/InventoryModule";
 import POSModule from "../modules/POSModule";
 import ClientsModule from "../modules/ClientsModule";
-import CurrencyModule from "../modules/CurrencyModule";
+import CurrencyModule from "../modules/currency/CurrencyModule";
 import ReportsModule from "../modules/ReportsModule";
 
 //Definicion centralizada de los items de navegacion para el sidebar

@@ -1,32 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import axios from "axios";
 
-/* Custom Hook para gestionar el estado de las peticones a la api  */
-
-function useApiData(url, options = {}) {
+function useApiData(url) {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  //Funcion para traer los datos
+  const fetchData = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get(url);
+      setData(response.data); //Axios ya devuelve el json
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [url]);
+
+  //useEffect: Carga inicial
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url, options);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const json = await response.json();
-        setData(json);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchData();
-  }, [url, options]); //Si la url u options cambian se vuelve a ejecutar el efecto
+  }, [fetchData]);
 
-  return { data, isLoading, error };
+  //Devolvemos todo al componente
+  return { data, isLoading, error, refetch: fetchData };
 }
 
 export default useApiData;
