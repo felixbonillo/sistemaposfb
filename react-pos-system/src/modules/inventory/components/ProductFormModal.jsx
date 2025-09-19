@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 
-function ProductFormModal({ isOpen, onClose, onAddProduct }) {
+function ProductFormModal({ isOpen, onClose, onSave, product }) {
     const [productData, setProductData] = useState({
         name: "",
-        priceUSD: "",
-        stock: "",
+        priceUSD: 0,
+        stock: 0,
     });
 
     useEffect(() => {
-        if (isOpen) {
-            setProductData({ name: "", priceUSD: "", stock: "" }); //Resetea el formulario
+        if (product) {
+            setProductData(product); //Resetea el formulario
+        } else {
+            //Si estamos creando, reiniciar formulario
+            setProductData({ name: "", priceUSD: 0, stock: 0 })
         }
-    }, [isOpen]);
+    }, [product, isOpen]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -34,7 +37,7 @@ function ProductFormModal({ isOpen, onClose, onAddProduct }) {
             alert("Por favor, completa todos los campos con valores validos ");
             return;
         }
-        onAddProduct(productData);
+        onSave(productData);
         onClose(); //Cerrar modal despues de anadir
     };
     if (!isOpen) return null; //No renderizar si no esta abierto
@@ -43,7 +46,7 @@ function ProductFormModal({ isOpen, onClose, onAddProduct }) {
         <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50">
             <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md mx-4">
                 <h3 className="text 2xl font-bold mb-6 text-gray-800">
-                    Añadir Nuevo Producto
+                    {product ? "Editar Producto" : "Añadir Nuevo Producto"}
                 </h3>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
@@ -101,10 +104,9 @@ function ProductFormModal({ isOpen, onClose, onAddProduct }) {
                     <div className="flex items-center justify-between">
                         <button
                             type="submit"
-                            className="bg-blue-600 hover:bg-blue-700
-                        text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200"
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition duration-300"
                         >
-                            Guardar Producto
+                            {product ? "Guardar Cambios" : "Guardar Producto"}
                         </button>
                         <button
                             type="button"

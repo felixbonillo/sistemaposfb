@@ -37,13 +37,21 @@ function ProductTable({
       {
         accessorKey: "priceUSD",
         header: "Precio (USD)",
-        cell: (info) => `$${info.getValue().toFixed(2)}`,
+        cell: (info) => {
+          const value = Number(info.getValue());
+          return `$${isNaN(value) ? "0.00" : value.toFixed(2)}`
+        }
       },
       {
-        accessorKey: "priceBs",
         header: "Precio (Bs)",
-        cell: (info) =>
-          `Bs ${(info.row.original.priceUSD * bcvRate).toFixed(2)}`,
+        cell: (info) => {
+          const usd = Number(info.row.original.priceUSD);
+          const rate = Number(bcvRate);
+          if (!usd || !rate || isNaN(usd * rate)) {
+            return "Bs 0.00";
+          }
+          return `Bs ${(usd * rate).toFixed(2)}`;
+        }
       },
       {
         accessorKey: "stock",
