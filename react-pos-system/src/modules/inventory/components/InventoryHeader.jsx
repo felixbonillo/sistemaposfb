@@ -1,4 +1,4 @@
-import InventorySearch from "./components/InventorySearch";
+import InventorySearch from "./InventorySearch";
 
 export default function InventoryHeader({ userRole, onAdd, globalFilter, setGlobalFilter }) {
     return (

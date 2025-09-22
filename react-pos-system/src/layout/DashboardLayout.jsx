@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 //Componentes de iconos que se usaran en sidebar
-import Sidebar from "../components/Sidebar";
+import Sidebar from "./Sidebar";
 import {
   FaCube,
   FaUsers,
@@ -12,10 +12,10 @@ import {
 
 // --- Importaciones de componentes necesarios MODULOS ---
 import InventoryModule from "../modules/inventory/InventoryModule";
-import POSModule from "../modules/POSModule";
-import ClientsModule from "../modules/ClientsModule";
+import POSModule from "../modules/pos/POSModule";
+import ClientsModule from "../modules/clients/ClientsModule";
 import CurrencyModule from "../modules/currency/CurrencyModule";
-import ReportsModule from "../modules/ReportsModule";
+import ReportsModule from "../modules/Reports/ReportsModule";
 
 //Definicion centralizada de los items de navegacion para el sidebar
 //Aqui se especifican el id, nombre, el componente de Icono y los roles que pueden acceder a cada item

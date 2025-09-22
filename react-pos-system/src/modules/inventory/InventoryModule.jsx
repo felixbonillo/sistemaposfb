@@ -1,6 +1,6 @@
 import ProductTable from "./components/ProductTable";
 import ProductFormModal from "./components/ProductFormModal";
-import InventoryHeader from "./InventoryHeader";
+import InventoryHeader from "./components/InventoryHeader";
 import { useInventory } from "./hooks/useInventory";
 
 //Datos Simulados mientras, luego vendra de una api
