@@ -43,16 +43,19 @@ export default function ProductFormModal({ isOpen, onClose, onSave, initialData 
             return;
         }
 
+        const productToSave = normalizeProduct(productData)
+
         onSave(productToSave);
         onClose(); //Cerrar modal despues de anadir
     };
+
     if (!isOpen) return null; //No renderizar si no esta abierto
 
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50">
             <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md mx-4">
                 <h3 className="text 2xl font-bold mb-6 text-gray-800">
-                    {product ? "Editar Producto" : "Añadir Nuevo Producto"}
+                    {productData.id ? "Editar Producto" : "Añadir Nuevo Producto"}
                 </h3>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
@@ -112,7 +115,7 @@ export default function ProductFormModal({ isOpen, onClose, onSave, initialData 
                             type="submit"
                             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition duration-300"
                         >
-                            {product ? "Guardar Cambios" : "Guardar Producto"}
+                            {productData.id ? "Guardar Cambios" : "Guardar Producto"}
                         </button>
                         <button
                             type="button"
