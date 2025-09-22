@@ -1,43 +1,49 @@
 import React, { useEffect, useState } from "react";
+import { normalizeProduct } from "../helpers/productHelpers";
 
-function ProductFormModal({ isOpen, onClose, onSave, product }) {
+export default function ProductFormModal({ isOpen, onClose, onSave, initialData }) {
     const [productData, setProductData] = useState({
+        id: null,
         name: "",
         priceUSD: 0,
         stock: 0,
     });
 
     useEffect(() => {
-        if (product) {
-            setProductData(product); //Resetea el formulario
+        if (initialData) {
+            setProductData(initialData)
         } else {
-            //Si estamos creando, reiniciar formulario
-            setProductData({ name: "", priceUSD: 0, stock: 0 })
+            setProductData({
+                id: null,
+                name: "",
+                priceUSD: "",
+                stock: "",
+            })
         }
-    }, [product, isOpen]);
+
+    }, [initialData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name === "priceUSD" || name === "stock") {
-            setProductData({ ...productData, [name]: Number(value) || "" });
-        } else {
-            setProductData({ ...productData, [name]: value });
-        }
+        setProductData((prev) => ({
+            ...prev,
+            [name]: value,
+        }))
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (
-            !productData.name ||
-            !productData.priceUSD ||
-            productData.priceUSD <= 0 ||
-            !productData.stock ||
-            productData.stock < 0
-        ) {
-            alert("Por favor, completa todos los campos con valores validos ");
+        if (!productData.name.trim()) {
+            alert("El nombre es obligatorio")
             return;
         }
-        onSave(productData);
+
+        if (productData.priceUSD <= 0) {
+            alert("El precio debe ser mayor de 0")
+            return;
+        }
+
+        onSave(productToSave);
         onClose(); //Cerrar modal despues de anadir
     };
     if (!isOpen) return null; //No renderizar si no esta abierto
@@ -121,5 +127,3 @@ function ProductFormModal({ isOpen, onClose, onSave, product }) {
         </div>
     );
 }
-
-export default ProductFormModal;
