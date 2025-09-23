@@ -2,8 +2,7 @@ import ProductTable from "./components/ProductTable";
 import ProductFormModal from "./components/ProductFormModal";
 import InventoryHeader from "./components/InventoryHeader";
 import { useInventory } from "./hooks/useInventory";
-
-//Datos Simulados mientras, luego vendra de una api
+import InventoryActions from "./components/InventoryActions";
 
 function InventoryModule({ userRole }) {
 
@@ -25,11 +24,11 @@ function InventoryModule({ userRole }) {
     <div className="p-6 bg-gray-50 min-h-screen">
 
       <InventoryHeader
-        userRole={userRole}
-        onAdd={handleAdd}
         globalFilter={search}
         setGlobalFilter={setSearch}
       />
+
+      <InventoryActions onAdd={handleAdd} />
 
 
       {/* Tabla */}
