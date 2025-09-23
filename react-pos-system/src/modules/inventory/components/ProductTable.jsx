@@ -14,8 +14,8 @@ function ProductTable({
   products,
   bcvRate,
   userRole,
-  onEditProduct,
-  onDeleteProduct,
+  onEdit,
+  onDelete,
   globalFilter,
   setGlobalFilter
 }) {
@@ -70,14 +70,14 @@ function ProductTable({
         ) => (
           <div className="flex justify-center items-center">
             <button
-              onClick={() => onEditProduct(row.original)} // Pasa el producto completo
+              onClick={() => onEdit(row.original)} // Pasa el producto completo
               className="text-blue-600 hover:text-blue-800 mr-3 text-lg"
               title="Editar producto"
             >
               Editar
             </button>
             <button
-              onClick={() => onDeleteProduct(row.original.id)} // Pasa solo el ID para eliminar
+              onClick={() => onDelete(row.original.id)} // Pasa solo el ID para eliminar
               className="text-red-600 hover:text-red-800 text-lg"
               title="Eliminar producto"
             >
@@ -89,7 +89,7 @@ function ProductTable({
     }
 
     return baseColumns;
-  }, [bcvRate, userRole, onEditProduct, onDeleteProduct]); // Dependencias: Si cambian, se recalculan las columnas
+  }, [bcvRate, userRole, onEdit, onDelete]); // Dependencias: Si cambian, se recalculan las columnas
   //Creamos la instancia de la tabla usando useReactTable hook
 
   const table = useReactTable({

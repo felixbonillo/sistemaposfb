@@ -13,17 +13,17 @@ export function useInventory() {
     p.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handleAddProduct = () => {
+  const handleAdd = () => {
     setEditingProduct(null);
     setIsModalOpen(true);
   };
 
-  const handleEditProduct = (product) => {
+  const handleEdit = (product) => {
     setEditingProduct(product);
     setIsModalOpen(true);
   };
 
-  const handleSaveProduct = (product) => {
+  const handleSave = (product) => {
     if (editingProduct) {
       setProducts((prev) =>
         prev.map((p) => (p.id === editingProduct.id ? { ...p, ...product } : p))
@@ -34,7 +34,7 @@ export function useInventory() {
     setIsModalOpen(false);
   };
 
-  const handleDeleteProduct = (id) => {
+  const handleDelete = (id) => {
     setProducts((prev) => prev.filter((p) => p.id !== id));
   };
 
@@ -45,9 +45,9 @@ export function useInventory() {
     isModalOpen,
     setIsModalOpen,
     editingProduct,
-    handleAddProduct,
-    handleEditProduct,
-    handleSaveProduct,
-    handleDeleteProduct,
+    handleAdd,
+    handleEdit,
+    handleSave,
+    handleDelete,
   };
 }

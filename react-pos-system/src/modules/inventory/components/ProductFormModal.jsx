@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { normalizeProduct } from "../helpers/productHelpers";
 
-export default function ProductFormModal({ isOpen, onClose, onSave, initialData }) {
+export default function ProductFormModal({ isOpen, onClose, onSave, product }) {
     const [productData, setProductData] = useState({
         id: null,
         name: "",
@@ -10,18 +10,18 @@ export default function ProductFormModal({ isOpen, onClose, onSave, initialData 
     });
 
     useEffect(() => {
-        if (initialData) {
-            setProductData(initialData)
+        if (product) {
+            setProductData(product)
         } else {
             setProductData({
                 id: null,
                 name: "",
-                priceUSD: "",
-                stock: "",
+                priceUSD: 0,
+                stock: 0,
             })
         }
 
-    }, [initialData]);
+    }, [product]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

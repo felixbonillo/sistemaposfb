@@ -14,10 +14,10 @@ function InventoryModule({ userRole }) {
     isModalOpen,
     setIsModalOpen,
     editingProduct,
-    handleAddProduct,
-    handleEditProduct,
-    handleSaveProduct,
-    handleDeleteProduct,
+    handleAdd,
+    handleEdit,
+    handleSave,
+    handleDelete,
   } = useInventory();
 
 
@@ -26,7 +26,7 @@ function InventoryModule({ userRole }) {
 
       <InventoryHeader
         userRole={userRole}
-        onAdd={handleAddProduct}
+        onAdd={handleAdd}
         globalFilter={search}
         setGlobalFilter={setSearch}
       />
@@ -35,10 +35,9 @@ function InventoryModule({ userRole }) {
       {/* Tabla */}
       <ProductTable
         products={products}
-        onEdit={userRole === "admin" ? handleEditProduct : undefined}
-        onDelete={userRole === "admin" ? handleDeleteProduct : undefined}
+        onEdit={userRole === "admin" ? handleEdit : undefined}
+        onDelete={userRole === "admin" ? handleDelete : undefined}
         userRole={userRole}
-        bcvRate={36.5}
       />
 
       {/* Modal */}
@@ -46,7 +45,7 @@ function InventoryModule({ userRole }) {
         <ProductFormModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          onSave={handleSaveProduct}
+          onSave={handleSave}
           product={editingProduct}
         />
       )}
