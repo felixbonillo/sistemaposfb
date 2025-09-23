@@ -7,10 +7,12 @@ import {
   getFilteredRowModel,
 } from "@tanstack/react-table";
 
+// import { useCurrency } from "../../../context/useCurrency";
+
 //Este componente solo se encargara de mostrar la tabla de productos
 //Recibira products como una prop
 
-function ProductTable({
+export default function ProductTable({
   products,
   bcvRate,
   userRole,
@@ -19,6 +21,8 @@ function ProductTable({
   globalFilter,
   setGlobalFilter
 }) {
+
+  // const { rate } = useCurrency()
   //1. Definir las columnas de las tablas
   //Cada objeto va a definir una columna
 
@@ -154,5 +158,3 @@ function ProductTable({
     </div>
   );
 }
-
-export default ProductTable;
