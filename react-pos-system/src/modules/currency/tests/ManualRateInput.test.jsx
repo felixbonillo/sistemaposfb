@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import ManualRateInput from "../ManualRateInput";
+import ManualRateInput from "../components/ManualRateInput";
 import { describe, it, expect, vi } from "vitest";
 
 describe("ManualRateInput", () => {

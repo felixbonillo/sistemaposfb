@@ -1,9 +1,8 @@
 import ProductTable from "./components/ProductTable";
 import ProductFormModal from "./components/ProductFormModal";
-import InventoryHeader from "./InventoryHeader";
+import InventoryHeader from "./components/InventoryHeader";
 import { useInventory } from "./hooks/useInventory";
-
-//Datos Simulados mientras, luego vendra de una api
+import InventoryActions from "./components/InventoryActions";
 
 function InventoryModule({ userRole }) {
 
@@ -14,10 +13,10 @@ function InventoryModule({ userRole }) {
     isModalOpen,
     setIsModalOpen,
     editingProduct,
-    handleAddProduct,
-    handleEditProduct,
-    handleSaveProduct,
-    handleDeleteProduct,
+    handleAdd,
+    handleEdit,
+    handleSave,
+    handleDelete,
   } = useInventory();
 
 
@@ -25,20 +24,19 @@ function InventoryModule({ userRole }) {
     <div className="p-6 bg-gray-50 min-h-screen">
 
       <InventoryHeader
-        userRole={userRole}
-        onAdd={handleAddProduct}
         globalFilter={search}
         setGlobalFilter={setSearch}
       />
+
+      <InventoryActions onAdd={handleAdd} />
 
 
       {/* Tabla */}
       <ProductTable
         products={products}
-        onEdit={userRole === "admin" ? handleEditProduct : undefined}
-        onDelete={userRole === "admin" ? handleDeleteProduct : undefined}
+        onEdit={userRole === "admin" ? handleEdit : undefined}
+        onDelete={userRole === "admin" ? handleDelete : undefined}
         userRole={userRole}
-        bcvRate={36.5}
       />
 
       {/* Modal */}
@@ -46,7 +44,7 @@ function InventoryModule({ userRole }) {
         <ProductFormModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          onSave={handleSaveProduct}
+          onSave={handleSave}
           product={editingProduct}
         />
       )}

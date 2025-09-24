@@ -7,18 +7,22 @@ import {
   getFilteredRowModel,
 } from "@tanstack/react-table";
 
+// import { useCurrency } from "../../../context/useCurrency";
+
 //Este componente solo se encargara de mostrar la tabla de productos
 //Recibira products como una prop
 
-function ProductTable({
+export default function ProductTable({
   products,
   bcvRate,
   userRole,
-  onEditProduct,
-  onDeleteProduct,
+  onEdit,
+  onDelete,
   globalFilter,
   setGlobalFilter
 }) {
+
+  // const { rate } = useCurrency()
   //1. Definir las columnas de las tablas
   //Cada objeto va a definir una columna
 
@@ -70,14 +74,14 @@ function ProductTable({
         ) => (
           <div className="flex justify-center items-center">
             <button
-              onClick={() => onEditProduct(row.original)} // Pasa el producto completo
+              onClick={() => onEdit(row.original)} // Pasa el producto completo
               className="text-blue-600 hover:text-blue-800 mr-3 text-lg"
               title="Editar producto"
             >
               Editar
             </button>
             <button
-              onClick={() => onDeleteProduct(row.original.id)} // Pasa solo el ID para eliminar
+              onClick={() => onDelete(row.original.id)} // Pasa solo el ID para eliminar
               className="text-red-600 hover:text-red-800 text-lg"
               title="Eliminar producto"
             >
@@ -89,7 +93,7 @@ function ProductTable({
     }
 
     return baseColumns;
-  }, [bcvRate, userRole, onEditProduct, onDeleteProduct]); // Dependencias: Si cambian, se recalculan las columnas
+  }, [bcvRate, userRole, onEdit, onDelete]); // Dependencias: Si cambian, se recalculan las columnas
   //Creamos la instancia de la tabla usando useReactTable hook
 
   const table = useReactTable({
@@ -154,5 +158,3 @@ function ProductTable({
     </div>
   );
 }
-
-export default ProductTable;

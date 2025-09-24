@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { normalizeProduct } from "../helpers/productHelpers";
 
-function ProductFormModal({ isOpen, onClose, onSave, product }) {
+export default function ProductFormModal({ isOpen, onClose, onSave, product }) {
     const [productData, setProductData] = useState({
+        id: null,
         name: "",
         priceUSD: 0,
         stock: 0,
@@ -9,44 +11,51 @@ function ProductFormModal({ isOpen, onClose, onSave, product }) {
 
     useEffect(() => {
         if (product) {
-            setProductData(product); //Resetea el formulario
+            setProductData(product)
         } else {
-            //Si estamos creando, reiniciar formulario
-            setProductData({ name: "", priceUSD: 0, stock: 0 })
+            setProductData({
+                id: null,
+                name: "",
+                priceUSD: 0,
+                stock: 0,
+            })
         }
-    }, [product, isOpen]);
+
+    }, [product]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name === "priceUSD" || name === "stock") {
-            setProductData({ ...productData, [name]: Number(value) || "" });
-        } else {
-            setProductData({ ...productData, [name]: value });
-        }
+        setProductData((prev) => ({
+            ...prev,
+            [name]: value,
+        }))
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (
-            !productData.name ||
-            !productData.priceUSD ||
-            productData.priceUSD <= 0 ||
-            !productData.stock ||
-            productData.stock < 0
-        ) {
-            alert("Por favor, completa todos los campos con valores validos ");
+        if (!productData.name.trim()) {
+            alert("El nombre es obligatorio")
             return;
         }
-        onSave(productData);
+
+        if (productData.priceUSD <= 0) {
+            alert("El precio debe ser mayor de 0")
+            return;
+        }
+
+        const productToSave = normalizeProduct(productData)
+
+        onSave(productToSave);
         onClose(); //Cerrar modal despues de anadir
     };
+
     if (!isOpen) return null; //No renderizar si no esta abierto
 
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50">
             <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md mx-4">
                 <h3 className="text 2xl font-bold mb-6 text-gray-800">
-                    {product ? "Editar Producto" : "Añadir Nuevo Producto"}
+                    {productData.id ? "Editar Producto" : "Añadir Nuevo Producto"}
                 </h3>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
@@ -106,7 +115,7 @@ function ProductFormModal({ isOpen, onClose, onSave, product }) {
                             type="submit"
                             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition duration-300"
                         >
-                            {product ? "Guardar Cambios" : "Guardar Producto"}
+                            {productData.id ? "Guardar Cambios" : "Guardar Producto"}
                         </button>
                         <button
                             type="button"
@@ -121,5 +130,3 @@ function ProductFormModal({ isOpen, onClose, onSave, product }) {
         </div>
     );
 }
-
-export default ProductFormModal;
